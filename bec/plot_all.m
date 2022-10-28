@@ -1,4 +1,10 @@
-function [Ns ach_dt ach_gal conv normapx_val] = plot_all(delta, epsil);
+function [Ns ach_dt ach_gal conv normapx_val] = plot_all(delta, epsil)
+
+set(0,'DefaultTextFontName','Times','DefaultTextFontSize',16,...
+    'DefaultAxesFontName','Times','DefaultAxesFontSize',14,...
+    'DefaultLineLineWidth',1,'DefaultLineMarkerSize',7.75);
+set(groot, 'defaultAxesTickLabelInterpreter','latex'); 
+set(groot, 'defaultLegendInterpreter','latex');
 
 if (nargin < 1) || isempty(delta)
 	delta = 0.5;
@@ -23,7 +29,7 @@ ach_dt = dt_ach(Ns, delta, epsil);
 figure;
 plot(Ns_cap, Capr, 'r--', Ns, conv./Ns, 'r', Ns, normapx_val./Ns, 'k-',  Ns, ach_dt./Ns, 'b', ...
 	Ns, ach_gal./Ns, 'b-.');
-xlabel('Blocklen, n'); ylabel('Rate, R'); ylim([0 1.05*cap]);
+xlabel('Blocklength, $n$', 'Interpreter','latex'); ylabel('Rate, $R$', 'Interpreter','latex'); ylim([0 1.05*cap]);
 title(sprintf('Bounds for the BEC(%g), P_{e,max} = %g', delta, epsil));
 legend('Capacity', 'Converse',  'Normal approximation', 'DT achievability', 'Gallager achievability', 'Location', 'SouthEast');
 grid on
